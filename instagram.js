@@ -1,5 +1,4 @@
 var accessToken = 'd14057649c304e0891fa6d897eb95a97';
-var caption;
 
 $.ajax({
     url: 'https://api.instagram.com/v1/users/6740542/media/recent/?client_id=d14057649c304e0891fa6d897eb95a97&count=10',
@@ -9,11 +8,12 @@ $.ajax({
         console.log(response);
 			
         for(x in response.data){
-			var innerHTML= '<div class="slides"><img src="'+response.data[x].images.low_resolution.url+'"></div>';
+			var innerHTML= '<div class="slides"><img src="'+response.data[x].images.low_resolution.url+'">';
             if (response.data[x].caption === null) {
+                        innerHTML += '</div>';
                         console.log('if was called');
                     } else {
-                        caption += '<p class="ptext">'+response.data[x].caption.text+'</p>';
+                        innerHTML += '<p class="ptext">'+response.data[x].caption.text+'</p></div>';
                         console.log('else was called');
                     } //ifelse statement
             $('.carousel').append(innerHTML);
@@ -23,7 +23,7 @@ $.ajax({
 
 
         $('.carousel').slick({
-            arrows:false,
+            arrows:true,
             dots:true,
             infinite:true,
             slidesToShow:3,
