@@ -9,11 +9,12 @@ $.ajax({
 			
         for(x in response.data){
 			var innerHTML= '<div class="slides"><img src="'+response.data[x].images.low_resolution.url+'">';
+             var date = new Date(parseInt(response.data[x].created_time) * 1000);
             if (response.data[x].caption === null) {
-                        innerHTML += '</div>';
+                        innerHTML += '<p class="dtext">' + date + '</p></div>';
                         console.log('if was called');
                     } else {
-                        innerHTML += '<p class="ptext">'+response.data[x].caption.text+'</p></div>';
+                        innerHTML += '<p class="dtext">' + date + '</p><p class="ptext">'+response.data[x].caption.text+'</p></div>';
                         console.log('else was called');
                     } //ifelse statement
             $('.carousel').append(innerHTML);
